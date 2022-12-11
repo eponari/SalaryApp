@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -33,12 +34,11 @@ public class UserController {
     }
 
     @PostMapping("/createUser")
-    ResponseEntity<User> createUser(@RequestBody UserDTO userDTO){
+    ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO){
         try{
             User user = new User(userDTO);
-
             userRepository.save(user);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<User>(user,HttpStatus.CREATED);
         }catch (Exception e){
             log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

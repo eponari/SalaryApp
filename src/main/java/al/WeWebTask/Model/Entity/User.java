@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -18,9 +19,11 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     Integer id;
 
+    @NotNull(message = "Name is empty.")
     @Column(name="full_name")
     String fullName;
 
+    @NotNull(message = "Wage is empty.")
     @Column(name="total_paga")
     double totalPaga;
 
